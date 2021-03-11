@@ -1,17 +1,11 @@
-import React from 'react';
+import {Component, createElement as re} from 'react';
 import ReactDOM from 'react-dom';
 
 
-//   React.createElement(
-//     String/ReactClass type,
-//     [object props],
-//     [children...]
-//   ) -> React Element
+const Title = props => re('h1', {}, props.text);
+const Btn = props => re('button', {onClick: props.onClick}, props.label);
 
-const Title = props => React.createElement('h1', {}, props.text);
-const Btn = props => React.createElement('button', {onClick: props.onClick}, props.label);
-
-class StateHolder extends React.Component {
+class StateHolder extends Component {
   constructor(props) {
     super(props);
     this.state = {text: props.text};
@@ -22,20 +16,14 @@ class StateHolder extends React.Component {
   }
 
   render() {
-    const title = React.createElement(Title, {text: this.state.text});
-    const btn = React.createElement(Btn, {onClick: this.btnPress, label: 'PressMe'});    
-    return React.createElement('div', {}, title, btn);
+    const title = re(Title, {text: this.state.text});
+    const btn = re(Btn, {onClick: this.btnPress, label: 'PressMe'});    
+    return re('div', {}, title, btn);
   } 
 }
 
-const sh = React.createElement(StateHolder, {text: 'This is text'});
-const element = React.createElement('section', {style: {color: 'red', background: 'black', padding: '7px'}}, sh);
-
-//   ReactDOM.render(
-//     ReactElement element,
-//     DOMElement container,
-//     [function callback]
-//   ) -> ReactComponent
+const sh = re(StateHolder, {text: 'This is TEXT!!!'});
+const element = re('section', {style: {color: 'red', background: 'black', padding: '7px'}}, sh);
 
 const root = document.getElementById('root');
 ReactDOM.render(

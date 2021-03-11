@@ -8,8 +8,15 @@ import ReactDOM from 'react-dom';
 //     [children...]
 //   ) -> React Element
 
-const title = React.createElement('h1', {}, 'Hello React Element');
-const element = React.createElement('section', {}, title);
+const Title = props => React.createElement('h1', {}, props.text);
+const Btn = props => React.createElement('button', {onClick: props.onClick}, props.label);
+
+const btnPress = () => console.log('Button pressed');
+
+const title = React.createElement(Title, {text: 'This is a text'});
+const button = React.createElement(Btn, {onClick: btnPress, label: 'Click on me!'});
+
+const element = React.createElement('section', {style: {color: 'red', background: 'black'}}, title, button);
 
 //   ReactDOM.render(
 //     ReactElement element,

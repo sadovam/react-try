@@ -8,7 +8,8 @@ import ReactDOM from 'react-dom';
 //     [children...]
 //   ) -> React Element
 
-const element = React.createElement('h1', {}, 'Hello React Element');
+const title = React.createElement('h1', {}, 'Hello React Element');
+const element = React.createElement('section', {}, title);
 
 //   ReactDOM.render(
 //     ReactElement element,

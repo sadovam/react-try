@@ -11,11 +11,25 @@ import ReactDOM from 'react-dom';
 const Title = props => React.createElement('h1', {}, props.text);
 const Btn = props => React.createElement('button', {onClick: props.onClick}, props.label);
 
-const btnPress = () => console.log('Button pressed');
+class StateHolder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: props.text};
+  }
+  
+  btnPress = () => {
+    this.setState({text: 'UHHH...'});
+  }
 
-const title = React.createElement(Title, {text: 'This is a text'});
-const button = React.createElement(Btn, {onClick: btnPress, label: 'Click on me!'});
-const element = React.createElement('section', {style: {color: 'red', background: 'black', padding: '7px'}}, title, button);
+  render() {
+    const title = React.createElement(Title, {text: this.state.text});
+    const btn = React.createElement(Btn, {onClick: this.btnPress, label: 'PressMe'});    
+    return React.createElement('div', {}, title, btn);
+  } 
+}
+
+const sh = React.createElement(StateHolder, {text: 'This is text'});
+const element = React.createElement('section', {style: {color: 'red', background: 'black', padding: '7px'}}, sh);
 
 //   ReactDOM.render(
 //     ReactElement element,
@@ -27,14 +41,4 @@ const root = document.getElementById('root');
 ReactDOM.render(
   element,
   root
-);
-
-const btitle = React.createElement(Title, {text: 'This is not a text'});
-const bbutton = React.createElement(Btn, {onClick: btnPress, label: 'Don`t click on me!'});
-const belement = React.createElement('section', {style: {color: 'green', background: 'black', padding: '7px'}}, btitle, bbutton);
-
-const broot = document.getElementById('broot');
-ReactDOM.render(
-  belement,
-  broot
 );
